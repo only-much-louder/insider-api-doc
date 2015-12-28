@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Insider API Documentation by only-much-louder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Insider API Documentation</h1>
+      <h2 class="project-tagline">Api documentation for Insider.in</h2>
+      <a href="https://github.com/only-much-louder/insider-api-doc" class="btn">View on GitHub</a>
+      <a href="https://github.com/only-much-louder/insider-api-doc/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/only-much-louder/insider-api-doc/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="domain" class="anchor" href="#domain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Domain</h1>
+
+<p>All API's run against the endpoint <a href="http://api.insider.in">API GATEWAY</a></p>
+
+<h2>
+<a id="listing-api" class="anchor" href="#listing-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>LISTING API</h2>
+
+<h3>
+<a id="access-enpoint" class="anchor" href="#access-enpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Access Enpoint</h3>
+
+<p></p>
+
+<p>Returns a list of active events ordered by recent show time for the tags supplied in the url params. The request must be accompanied by an appropriate API-KEY header value.</p>
+
+<p></p>
+
+<ul>
+<li>models (Required, multiple allowed)
+Can be either cell, event or both can be specified. Internally, models map to their eponymous content structures and data associated with the specified models will only be returned. Third parties can usually restrict to using models=event only.</li>
+</ul>
+
+<p>Single usage example</p>
+
+<p>/tag/list?tags=mumbai&amp;models=event</p>
+
+<p>Multiple usage</p>
+
+<p>/tag/list?tags=mumbai&amp;models=event&amp;models=cell</p>
+
+<p>tags (Required, multiple allowed)</p>
+
+<ul>
+<li>Slug (Required, multiple allowed)</li>
+</ul>
+
+<p>Name of the tag for which taggables are requested. For cities, slugs are, usually, lowercased name of the city. Venue, festival, artist or any other valid tag’s slug can also be used</p>
+
+<p>Single usage example</p>
+
+<p><a href="http://insider.in/tag/list?tags=bangalore">http://insider.in/tag/list?tags=bangalore</a></p>
+
+<p>Multiple usage example</p>
+
+<p><a href="http://insider.in/tag/list?tags=bangalore&amp;tags=mumbai">http://insider.in/tag/list?tags=bangalore&amp;tags=mumbai</a></p>
+
+<ul>
+<li>Operator (Optional, single valued, default ‘or’)</li>
+</ul>
+
+<p>Operator allows API consumer to specify, in case of multiple tags, whether to return a union of events for tags or an intersection.  A value of or returns union of events for multiple tags and a value of and returns intersection of events.</p>
+
+<p>Usage example (Return intersection of events in bangalore and comedy)</p>
+
+<p><a href="http://insider.in/tag/list?tags=bangalore&amp;tags=comedy&amp;operator=and">http://insider.in/tag/list?tags=bangalore&amp;tags=comedy&amp;operator=and</a></p>
+
+<h3>
+<a id="api-response" class="anchor" href="#api-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Response</h3>
+
+<p>The content type of the response will be application/json. The top-level structure of the response will contain the following fields.
+<code>{
+    “status”: “ok”,
+    “reason”: “success”,
+    “data”: {
+        “meta”: [ ],
+        “carousel”: [ ],
+        “featured”: [ ],
+        “list”: [ ],
+        “categories”: [ ]
+        }
+}</code></p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>“ok” if the request was successful</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>String</td>
+<td>“success” if the request was successful, otherwise will contain a message describing the error.</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Wrapper containing API response</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>Array</td>
+<td>Data relating to the tags requested. The list will contain one object for each tag requested.</td>
+</tr>
+<tr>
+<td>carousel</td>
+<td>Array</td>
+<td>List of events on the carousel for given tags and operator combination. Will contain one object for each event.</td>
+</tr>
+<tr>
+<td>featured</td>
+<td>Array</td>
+<td>List of events featured for given tags and operator combination. Will contain one object for each event.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>Array</td>
+<td>List of events in ascending order of their show time for the given tags and operator combination. Will contain one object for each event.</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>Array</td>
+<td>List of genre associated with events in the list.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that, the object contained in each of - list, featured and carousel - will have the same structure. The structure itself is defined later in the document.</p>
+
+<p>In case of a tag being requested is not found in the system, the endpoint will respond with an HTTP 404 error message along with relevant details.</p>
+
+<p></p>
+
+<p>As mentioned earlier, each object in - list, featured and carousel - will have the same structure with the following fields.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/only-much-louder/insider-api-doc">Insider API Documentation</a> is maintained by <a href="https://github.com/only-much-louder">only-much-louder</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
