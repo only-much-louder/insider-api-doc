@@ -20,15 +20,15 @@
 
     <section class="main-content">
       <h1>
-<a id="domain" class="anchor" href="#domain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Domain</h1>
+<a id="domain" class="anchor" href="#domain" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Domain</h1>
 
 <p>All API's run against the endpoint <a href="http://api.insider.in">API GATEWAY</a></p>
 
 <h2>
-<a id="listing-api" class="anchor" href="#listing-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>LISTING API</h2>
+<a id="listing-api" class="anchor" href="#listing-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LISTING API</h2>
 
 <h3>
-<a id="access-enpoint-taglist" class="anchor" href="#access-enpoint-taglist" aria-hidden="true"><span class="octicon octicon-link"></span></a>Access Enpoint: /tag/list</h3>
+<a id="access-enpoint-taglist" class="anchor" href="#access-enpoint-taglist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Access Enpoint: /tag/list</h3>
 
 <p>Returns a list of active events ordered by recent show time for the tags supplied in the url params. The request must be accompanied by an appropriate API-KEY header value.</p>
 
@@ -57,7 +57,7 @@
 </ul>
 
 <h3>
-<a id="api-response" class="anchor" href="#api-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Response</h3>
+<a id="api-response" class="anchor" href="#api-response" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Response</h3>
 
 <p>The content type of the response will be application/json. The top-level structure of the response will contain the following fields.</p>
 
@@ -288,6 +288,369 @@
 </tr>
 </tbody>
 </table>
+
+<h2>
+<a id="event-details-api" class="anchor" href="#event-details-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EVENT DETAILS API</h2>
+
+<p>Returns all the data for a give event id. It should be passed a valid API_KEY</p>
+
+<h3>
+<a id="access-point-eventgeteventdetailsforclient" class="anchor" href="#access-point-eventgeteventdetailsforclient" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ACCESS POINT: /event/getEventDetailsForClient/</h3>
+
+<h3>
+<a id="api-structure-all-event-information-is-structured-in-the-following-hierarchy" class="anchor" href="#api-structure-all-event-information-is-structured-in-the-following-hierarchy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Structure: All event information is structured in the following hierarchy</h3>
+
+<p>Event -&gt; Venue -&gt; [Shows] -&gt; [ItemGroups] -&gt; [Items]</p>
+
+<p>Terms:</p>
+
+<p>Event - The Event object has all the top level information needed to display and categorise any given event sold by Insider
+Venue - The Venue object details about the venue where the event will be happening, the object has the name of the venue along with the geo-location of the venue 
+Shows - The Show object has details about beginning and ending time for a particular show along with state information. 
+Items for sale -  Items for sale is a grouping array which allows items on sale to be grouped into categories thus making it easier for the consumer to understand them. For instance the Items for sale could be Seats, Tickets, Accommodation, F&amp;B etc 
+Items - Items is an array which consists of tickets which the user can buy. They have all display and financial information required</p>
+
+<h3>
+<a id="api-response-1" class="anchor" href="#api-response-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Response</h3>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ok<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+        <span class="pl-s"><span class="pl-pds">"</span>slug<span class="pl-pds">"</span></span>: ,
+        <span class="pl-s"><span class="pl-pds">"</span>category_id<span class="pl-pds">"</span></span>: {
+            <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>slug<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>icon_img<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>cities<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>&lt;cityName&gt;<span class="pl-pds">"</span></span>]
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>brand_id<span class="pl-pds">"</span></span>: {
+            <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>slug<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>horizontal_cover_image<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;urlToTheEventImage&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>vertical_cover_image<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;urlToTheEventImage&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span>: [{
+            <span class="pl-s"><span class="pl-pds">"</span>priority<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>tag_id<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>is_carousel<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>is_featured<span class="pl-pds">"</span></span>: 
+            }],
+        <span class="pl-s"><span class="pl-pds">"</span>price_display_string<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;string the price range&gt;<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>terms<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>&lt;term 1&gt;<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>&lt;term 2&gt;<span class="pl-pds">"</span></span>],
+        <span class="pl-s"><span class="pl-pds">"</span>is_free<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;BooleanToDenoteFreeEvents&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>is_rsvp<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;BooleanToDenoteRSVPEvents&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>event_state<span class="pl-pds">"</span></span>: [<span class="pl-ii">ArrayOfPossibleEventStates</span>],
+        <span class="pl-s"><span class="pl-pds">"</span>sold_out<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;BooleanToDenoteIfTheEventIsSoldOut&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;CityName&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>website_url<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;websiteOfTheEvent&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;descriptionOfTheEvent&gt;</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>venue<span class="pl-pds">"</span></span>: {
+            <span class="pl-s"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>: {
+                <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>slug<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>address<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>geolocation<span class="pl-pds">"</span></span>: {
+                    <span class="pl-s"><span class="pl-pds">"</span>latitude<span class="pl-pds">"</span></span>: ,
+                    <span class="pl-s"><span class="pl-pds">"</span>longitude<span class="pl-pds">"</span></span>: 
+                }
+            },
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>date_string<span class="pl-pds">"</span></span>: ,
+            <span class="pl-s"><span class="pl-pds">"</span>shows<span class="pl-pds">"</span></span>: [{
+                <span class="pl-s"><span class="pl-pds">"</span>date_string<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>start_utc_timestamp<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>end_utc_timestamp<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+                <span class="pl-s"><span class="pl-pds">"</span>sold_out<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;BooleanToDenoteIfTheShowIsSoldOut&gt;</span> ,
+                <span class="pl-s"><span class="pl-pds">"</span>items_for_sale<span class="pl-pds">"</span></span>: [{
+                    <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+                    <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+                    <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: ,
+                    <span class="pl-s"><span class="pl-pds">"</span>is_available<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;stateOfTheItemGroup&gt;</span>,
+                    <span class="pl-s"><span class="pl-pds">"</span>items<span class="pl-pds">"</span></span>: [{
+                        <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>price<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>quantity_available_for_purchase<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>needs_shipping_address<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>locked<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: ,
+                        <span class="pl-s"><span class="pl-pds">"</span>is_hidden<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;BooleanToDenoteIfTheItemIsHidden&gt;</span>,
+                        <span class="pl-s"><span class="pl-pds">"</span>availability_date<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;DateTillWhichTheItemIsAvailable&gt;</span>,
+                        <span class="pl-s"><span class="pl-pds">"</span>vendor<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>non_seated<span class="pl-pds">"</span></span>,
+                    }],
+                    <span class="pl-s"><span class="pl-pds">"</span>item_group_type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ticket<span class="pl-pds">"</span></span>
+                }],
+                <span class="pl-s"><span class="pl-pds">"</span>is_hidden<span class="pl-pds">"</span></span>: <span class="pl-ii">&lt;stateOfTheShow&gt;</span>
+            }]
+        }   }
+}</pre></div>
+
+<p>Object definitions </p>
+
+<p>Category (Key:category_id): Object represents the category of the event. Eg: Comedy, Music, Food or Workshop</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the category across the system.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the category</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>String</td>
+<td>A human readable unique identifier for events. Usually used for pretty and SEO friendly urls.</td>
+</tr>
+<tr>
+<td>icon_img</td>
+<td>String</td>
+<td>Url to the image which denotes the category (optional)</td>
+</tr>
+</tbody>
+</table>
+
+<p>Brand (Key:brand_id): Object represents the company organizing the event. </p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the Brand across the system.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the category</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>String</td>
+<td>A human readable unique identifier for events. Usually used for pretty and SEO friendly urls.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the company organizing the event or offering (optional)</td>
+</tr>
+</tbody>
+</table>
+
+<p>Show (Key: shows): Array of Objects which identifies the various show for this event. </p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date_string</td>
+<td>String</td>
+<td>Date display string to communicate the show timings, this is formatted differently and can have additional information thus making it different from start_utc_timestamp</td>
+</tr>
+<tr>
+<td>start_utc_timestamp</td>
+<td>UnixTimeStamp</td>
+<td>Start time for the show</td>
+</tr>
+<tr>
+<td>end_utc_timestamp</td>
+<td>UnixTimeStamp</td>
+<td>End time for the show</td>
+</tr>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the show across the system.</td>
+</tr>
+<tr>
+<td>sold_out</td>
+<td>Boolean</td>
+<td>Indicates if the show is sold out. If true, no user should be allowed to book a ticket against the show</td>
+</tr>
+</tbody>
+</table>
+
+<p>Items For Sale (key:items_for_sale): Array of Objects denoting the various groups of items available for sale</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the Group across the system.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the group for display</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the group</td>
+</tr>
+<tr>
+<td>is_available</td>
+<td>Boolean</td>
+<td>Indicates if the itemGroup is available or not. If false then dont display the group</td>
+</tr>
+</tbody>
+</table>
+
+<p>Items (key:items): Array of Objects denoting the various tickets which are available for sale</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the Item across the system.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the Item for display</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Number</td>
+<td>The price of the item</td>
+</tr>
+<tr>
+<td>quantity_available_for_purchase</td>
+<td>Number</td>
+<td>Total number currently available for sale</td>
+</tr>
+<tr>
+<td>needs_shipping_address</td>
+<td>Boolean</td>
+<td>Does the item need shipping address (this will be true in case the ticket needs to be delivered to the user )</td>
+</tr>
+<tr>
+<td>locked</td>
+<td>Boolean</td>
+<td>Ignore</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the ticket</td>
+</tr>
+<tr>
+<td>is_hidden</td>
+<td>Boolean</td>
+<td>Dont show this item if true</td>
+</tr>
+<tr>
+<td>availability_date</td>
+<td>Date/Time</td>
+<td>Date/ Time till which the item is available for sale. If lesser than current date time then dont display the item</td>
+</tr>
+<tr>
+<td>vendor</td>
+<td>String</td>
+<td>Type of item, can be [non_seated,seated,rsvp]</td>
+</tr>
+</tbody>
+</table>
+
+<p>Event: The Event object has all the objects mentioned above as well as information required for display </p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_id</td>
+<td>String</td>
+<td>An alpha-numeric string code which uniquely identifies the Brand across the system.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the category</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>String</td>
+<td>A human readable unique identifier for events. Usually used for pretty and SEO friendly urls.</td>
+</tr>
+<tr>
+<td>price_display_string</td>
+<td>String</td>
+<td>String which denotes the price range of all the tickets available for the item</td>
+</tr>
+<tr>
+<td>terms</td>
+<td>Array</td>
+<td>Terms and conditions for the event. Each object in the array is a String which defines one clause</td>
+</tr>
+<tr>
+<td>is_rsvp</td>
+<td>Boolean</td>
+<td>If this is true, then the event is a free event. In which case the interface should show the action button as RSVP and not Buy</td>
+</tr>
+<tr>
+<td>event_state</td>
+<td>String</td>
+<td>This string denotes the various possible states of the event. Some of the states are ['available', 'sold_out', 'tickets_at_venue', 'cancelled', 'rescheduled', 'unavailable', 'coming_soon']</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="issue-api" class="anchor" href="#issue-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ISSUE API</h2>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/only-much-louder/insider-api-doc">Insider API Documentation</a> is maintained by <a href="https://github.com/only-much-louder">only-much-louder</a>.</span>
